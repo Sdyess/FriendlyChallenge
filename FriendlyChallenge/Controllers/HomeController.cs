@@ -12,14 +12,17 @@ namespace FriendlyChallenge.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly OpenLibraryAPI.OpenLibraryClient _openLibraryClient;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, OpenLibraryAPI.OpenLibraryClient openLibraryClient)
         {
             _logger = logger;
+            _openLibraryClient = openLibraryClient;
         }
 
         public IActionResult Index()
         {
+            //var result = _openLibraryClient.GetDeserializedObjectAsync<Dictionary<string, OpenLibraryAPI.Models.Book>>("books?format=json&bibkeys=ISBN:0201558025&jscmd=data").Result;
             return View();
         }
 
