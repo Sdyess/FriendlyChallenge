@@ -6,23 +6,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FriendlyChallenge.Models;
+using FriendlyChallenge.Service.Authentication;
 
 namespace FriendlyChallenge.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly OpenLibraryAPI.OpenLibraryClient _openLibraryClient;
+        //private readonly OpenLibraryAPI.OpenLibraryClient _openLibraryClient;
+        private readonly AuthenticationService _authenticationService;
 
-        public HomeController(ILogger<HomeController> logger, OpenLibraryAPI.OpenLibraryClient openLibraryClient)
+        public HomeController(ILogger<HomeController> logger, AuthenticationService authenticationService)
         {
             _logger = logger;
-            _openLibraryClient = openLibraryClient;
+            _authenticationService = authenticationService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             //var result = _openLibraryClient.GetDeserializedObjectAsync<Dictionary<string, OpenLibraryAPI.Models.Book>>("books?format=json&bibkeys=ISBN:0201558025&jscmd=data").Result;
+            //var test = await _authenticationService.Login("test", "test");
             return View();
         }
 
